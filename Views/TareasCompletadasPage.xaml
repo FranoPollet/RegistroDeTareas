@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:RegistroDeTareas.ViewModels"
+             xmlns:models="clr-namespace:RegistroDeTareas.Models"
+             x:Class="RegistroDeTareas.Views.TareasCompletadasPage"
+             x:DataType="viewModels:TareasCompletadasViewModel"
+             Title="TareasCompletadasPage"
+             BackgroundColor="#121212">
+
+    <ScrollView Padding="20">
+        <VerticalStackLayout Spacing="15">
+
+            <Label Text="Historial de Completadas"
+                   FontSize="22"
+                   FontAttributes="Bold"
+                   TextColor="#4CAF50"
+                   HorizontalOptions="Center" />
+
+            <!-- CollectionView para renderizar las tareas archivadas -->
+            <CollectionView ItemsSource="{Binding TareasCompletadas}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Tareas">
+                        <Border Stroke="#4CAF50"
+                                StrokeThickness="1"
+                                Margin="0,0,0,10"
+                                Padding="12"
+                                BackgroundColor="#1E1E1E">
+
+                            <Grid ColumnDefinitions="*, Auto">
+                                <VerticalStackLayout Grid.Column="0" Spacing="4">
+                                    <!-- Título tachado o destacado -->
+                                    <Label Text="{Binding Titulo}"
+                                           FontSize="16"
+                                           FontAttributes="Bold"
+                                           TextColor="LightGray"
+                                           TextDecorations="Strikethrough" />
+                                    <Label Text="{Binding Descripcion}"
+                                           FontSize="13"
+                                           TextColor="Gray" />
+                                </VerticalStackLayout>
+
+                                <Label Grid.Column="1" 
+                                       Text="✓ Listo" 
+                                       TextColor="#4CAF50" 
+                                       FontAttributes="Bold" 
+                                       VerticalOptions="Center" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Botón para regresar programáticamente usando el ViewModel -->
+            <Button Text="Volver a Pendientes"
+                    Command="{Binding VolverAtrasCommand}"
+                    BackgroundColor="#3E3E3E"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    Margin="0,20,0,0" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+
+</ContentPage>
