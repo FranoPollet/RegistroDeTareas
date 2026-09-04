@@ -65,5 +65,33 @@ namespace RegistroDeTareas.ViewModels
             }
         }
 
+
+        // COMANDOS AGREGADOS PARA LA NAVEGACIÓN
+        //Comando ejecutado al precionar el check de completar
+        [RelayCommand]
+        private async Task CompletarTarea(Tareas tareaACompletar)
+        {
+            if (tareaACompletar == null) return;
+            
+            //1. La remuevo de la lista de pendientes actual
+            Tareas.Remove(tareaACompletar);
+
+            //2. Preparo el parametro de navegación en un diccionario
+            var parametros = new Dictionary<string, object>
+            {
+                {"TareaCompletada", tareaACompletar }
+            };
+
+            //3. Navego a la pantalla de completados pasando los parametros de forma asincrona
+            await Shell.Current.GoToAsync("TareasCompletadasPage", parametros);
+        }
+
+        //Comando para ir a ver la pantalla de completadas de forma directa
+        [RelayCommand]
+        private async Task IrACompletadas()
+        {
+            await Shell.Current.GoToAsync("TareasCompletadasPage");
+        }
+
     }
 }

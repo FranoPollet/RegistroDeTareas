@@ -6,8 +6,8 @@
         {
             InitializeComponent();
 
-            //MainPage = new AppShell();
-            MainPage = new RegistroDeTareas.Views.TodoListPage();
+            MainPage = new AppShell();
+            //MainPage = new RegistroDeTareas.Views.TodoListPage();
         }
     }
 }
