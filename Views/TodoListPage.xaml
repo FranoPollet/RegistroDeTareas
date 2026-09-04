@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:RegistroDeTareas.ViewModels"
+             xmlns:models="clr-namespace:RegistroDeTareas.Models"
+             x:Class="RegistroDeTareas.Views.TodoListPage"
+             x:DataType="viewModels:TodoListViewModel"
+             Title="Mis Tareas"
+             BackgroundColor="#1E1E1E">
+
+
+    <!-- ScrollView Permite que si hay muchas tareas, podamos hacer scroll con el dedo -->
+    <ScrollView Padding="20">
+        <!--Apilarmos todo verticalmente: Formulario arriba, lista abajo-->
+        <VerticalStackLayout Spacing="20">
+            <!--El spacing regula el espacio entre los elementos-->
+
+            <!-- ====== SECCIÓN DEL FORMULARIO INGRESO DE DATOS ======= -->
+            <Label Text="Crear Nueva Tarea"
+                   FontSize="20"
+                   FontAttributes="Bold"
+                   TextColor="White" />
+
+            <!--Entrada para el titulo-->
+            <Entry Placeholder="Titulo de la tarea"
+                   Text="{Binding NuevoTitulo}"
+                   TextColor="White"
+                   PlaceholderColor="Gray"
+                   BackgroundColor="#2D2D2D" />
+
+            <!-- Entrada para la Descripción -->
+            <Entry Placeholder="Descripción de la tarea"
+                   Text="{Binding NuevaDescripcion}"
+                   TextColor="White"
+                   PlaceholderColor="Gray"
+                   BackgroundColor="#2D2D2D" />
+
+            <!-- Entrada para la Fecha (como string según tu ViewModel) -->
+            <Entry Placeholder="Fecha límite (ej: 15/09/2026)"
+                   Text="{Binding NuevaFechaLimite}"
+                   TextColor="White"
+                   PlaceholderColor="Gray"
+                   BackgroundColor="#2D2D2D" />
+
+            <!-- Botón para disparar el comando/acción/Función que guarda la tarea -->
+            <Button Text="Agregar Tarea"
+                    BackgroundColor="#2196F3"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    Command="{Binding AgregarTareaCommand}" />
+
+
+            <!-- ==== SECCIÓN DE LA VISTA DE LAS TAREAS AGREGADA ==== -->
+            <Label Text="Tareas Pendientes"
+                   FontSize="20"
+                   FontAttributes="Bold"
+                   TextColor="White" />
+
+            <!-- Componente Estrealla para listas en MAUI -->
+            <CollectionView ItemsSource="{Binding Tareas}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Tareas">
+
+                        <!-- Tarjeta contenedora para cada tarea individual -->
+                        <Border Stroke="Gray"
+                                StrokeThickness="1"
+                                Margin="0, 50"
+                                Padding="10"
+                                BackgroundColor="#2D2D2D">
+
+                            <!-- Usamos un Grid para distribuir los elementos de la tarea -->
+                            <Grid ColumnDefinitions="Auto, *, Auto">
+                                <!-- Auto, *, Auto significa -->
+
+                                <!--1. Checkbox para marcar como completada la tarea (columna 0) -->
+                                <CheckBox Grid.Column="0"
+                                          IsChecked="{Binding Estado, Mode=TwoWay}"
+                                          VerticalOptions="Center" />
+
+                                <!--2. Textos de la tarea (columna 1) -->
+                                <VerticalStackLayout Grid.Column="1"
+                                                     VerticalOptions="Center"
+                                                     Margin="10,0">
+                                    <Label Text="{Binding Titulo}"
+                                           FontSize="16"
+                                           FontAttributes="Bold" />
+
+                                    <Label Text="{Binding Descripcion}"
+                                           FontSize="13"
+                                           TextColor="LightGray" />
+
+                                    <Label Text="{Binding FechaLimite}"
+                                           FontSize="11"
+                                           TextColor="Orange" />
+
+                                </VerticalStackLayout>
+
+                                <!--3. Botón para borrar la tarea pendiente o compeletada (columna 2)-->
+                                <Button Grid.Column="2"
+                                        Text="X"
+                                        BackgroundColor="#D32F2F"
+                                        TextColor="White"
+                                        FontAttributes="Bold"
+                                        WidthRequest="40"
+                                        HeightRequest="40"
+                                        CornerRadius="20"
+                                        VerticalOptions="Center"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:TodoListViewModel}},Path=EliminarTareaCommand}"
+                                        CommandParameter="{Binding .}" />
+
+                            </Grid>
+
+                        </Border>
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>    
