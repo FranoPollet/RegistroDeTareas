@@ -107,7 +107,7 @@
 
                                 <!--3. Botón para borrar la tarea pendiente o compeletada (columna 2)-->
                                 <!-- Controles de Acción (Columna derecha) -->
-                                <HorizontalStackLayout Grid.Column="1" Spacing="8" VerticalOptions="Center">
+                                <HorizontalStackLayout Grid.Column="2" Spacing="8" VerticalOptions="Center">
                                     <!-- Botón Completar (✓) -->
                                     <Button Text="✓"
                                             BackgroundColor="#4CAF50"
