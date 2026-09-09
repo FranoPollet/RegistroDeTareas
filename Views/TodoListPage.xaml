@@ -96,17 +96,30 @@
                                 </VerticalStackLayout>
 
                                 <!--3. Botón para borrar la tarea pendiente o compeletada (columna 2)-->
-                                <Button Grid.Column="2"
-                                        Text="X"
-                                        BackgroundColor="#D32F2F"
-                                        TextColor="White"
-                                        FontAttributes="Bold"
-                                        WidthRequest="40"
-                                        HeightRequest="40"
-                                        CornerRadius="20"
-                                        VerticalOptions="Center"
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:TodoListViewModel}},Path=EliminarTareaCommand}"
-                                        CommandParameter="{Binding .}" />
+                                <!-- Controles de Acción (Columna derecha) -->
+                                <HorizontalStackLayout Grid.Column="2" Spacing="8" VerticalOptions="Center">
+                                    <!-- Botón Completar (✓) -->
+                                    <Button Text="✓"
+                                            BackgroundColor="#4CAF50"
+                                            TextColor="White"
+                                            FontAttributes="Bold"
+                                            WidthRequest="40"
+                                            HeightRequest="40"
+                                            CornerRadius="20"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:TodoListViewModel}}, Path=CompletarTareaCommand}"
+                                            CommandParameter="{Binding .}" />
+
+                                    <!-- Botón Eliminar (X) -->
+                                    <Button Text="X"
+                                            BackgroundColor="#D32F2F"
+                                            TextColor="White"
+                                            FontAttributes="Bold"
+                                            WidthRequest="40"
+                                            HeightRequest="40"
+                                            CornerRadius="20"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:TodoListViewModel}}, Path=EliminarTareaCommand}"
+                                            CommandParameter="{Binding .}" />
+                                </HorizontalStackLayout>
 
                             </Grid>
 
