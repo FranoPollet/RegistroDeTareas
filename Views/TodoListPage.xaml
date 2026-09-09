@@ -15,6 +15,16 @@
         <VerticalStackLayout Spacing="20">
             <!--El spacing regula el espacio entre los elementos-->
 
+            <!-- Botón superior para navegar manualmente al historial -->
+            <Button Text="Ver Tareas Completadas ➔"
+                    Command="{Binding IrACompletadasCommand}"
+                    BackgroundColor="#4CAF50"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    HeightRequest="45" />
+
+            <BoxView HeightRequest="1" Color="Gray" Margin="0,5" />
+
             <!-- ====== SECCIÓN DEL FORMULARIO INGRESO DE DATOS ======= -->
             <Label Text="Crear Nueva Tarea"
                    FontSize="20"
@@ -50,7 +60,7 @@
                     Command="{Binding AgregarTareaCommand}" />
 
 
-            <!-- ==== SECCIÓN DE LA VISTA DE LAS TAREAS AGREGADA ==== -->
+            <!-- ==== SECCIÓN DE LA VISTA DE LAS TAREAS AGREGADAs/Pendientes ==== -->
             <Label Text="Tareas Pendientes"
                    FontSize="20"
                    FontAttributes="Bold"
@@ -97,7 +107,7 @@
 
                                 <!--3. Botón para borrar la tarea pendiente o compeletada (columna 2)-->
                                 <!-- Controles de Acción (Columna derecha) -->
-                                <HorizontalStackLayout Grid.Column="2" Spacing="8" VerticalOptions="Center">
+                                <HorizontalStackLayout Grid.Column="1" Spacing="8" VerticalOptions="Center">
                                     <!-- Botón Completar (✓) -->
                                     <Button Text="✓"
                                             BackgroundColor="#4CAF50"
